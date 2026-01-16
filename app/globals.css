@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-family-arabic: "Amiri", serif;
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:root {
+  --bg-color: var(--color-gray-50);
+  --text-color: var(--color-gray-800);
+  --card-bg: #ffffff;
+  --card-border: var(--color-gray-200);
+  --primary-color: var(--color-green-600);
+  --header-bg: var(--color-green-600);
+  --footer-bg: var(--color-gray-800);
+  --scrollbar-track: var(--color-gray-100);
+  --scrollbar-thumb: var(--color-green-500);
+}
+
+.dark {
+  --bg-color: var(--color-gray-950);
+  --text-color: var(--color-gray-200);
+  --card-bg: var(--color-gray-800);
+  --card-border: var(--color-gray-700);
+  --primary-color: var(--color-green-500);
+  --header-bg: var(--color-green-800);
+  --footer-bg: var(--color-gray-900);
+  --scrollbar-track: var(--color-gray-800);
+  --scrollbar-thumb: var(--color-green-600);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer components {
+  .arabic-text {
+    font-family: var(--font-family-arabic);
+    direction: rtl;
+  }
+
+  .card-dark {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+  }
+
+  .input-dark {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-color);
+
+    &:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+  }
+
+  .gradient-bg {
+    background: linear-gradient(
+      to bottom right,
+      var(--color-green-600),
+      var(--color-green-700)
+    );
+  }
+
+  .dark .gradient-bg {
+    background: linear-gradient(
+      to bottom right,
+      var(--color-green-700),
+      var(--color-green-800)
+    );
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in srgb, var(--scrollbar-thumb) 80%, black);
+}

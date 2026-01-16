@@ -31,11 +31,73 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+.env.*.local
+!.env.example  # Keep template
 
 # vercel
 .vercel
+.vercel_build_output/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ==================== #
+# TAMBAHAN BARU        #
+# ==================== #
+
+# Turbopack (Next.js 16)
+.turbopack/
+
+# Bun package manager
+bun.lockb
+
+# Audio files (project Quran)
+*.mp3
+*.m4a
+*.wav
+*.ogg
+
+# Development cache
+.cache/
+.next/cache/
+
+# IDE
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/*.code-snippets
+.idea/
+*.iml
+
+# OS files
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*~
+
+# Security
+*.key
+*.p12
+*.crt
+*.csr
+*.cer
+*.pub
+.secret
+.private
+
+# Temporary
+*.tmp
+*.temp
+tmp/
+temp/
