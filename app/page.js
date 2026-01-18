@@ -1,5 +1,9 @@
+"use client";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import Link from "next/link";
+import { storage } from "../utils/storage";
+
 import {
   BookOpen,
   Volume2,
@@ -48,6 +52,16 @@ export default function Home() {
     { label: "Terjemahan", value: "Bahasa Indonesia", icon: Volume2 },
     { label: "Audio Murattal", value: "5+ Qari", icon: TrendingUp },
   ];
+
+  const [lastRead, setLastRead] = useState(null);
+  const [bookmarkCount, setBookmarkCount] = useState(0);
+  const [progress, setProgress] = useState({});
+
+  useEffect(() => {
+    setLastRead(storage.getLastRead());
+    setBookmarkCount(storage.getBookmarks().length);
+    setProgress(storage.getProgress());
+  }, []);
 
   return (
     <Layout>
@@ -141,7 +155,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="bg-green-50 rounded-lg p-6 border-2 border-green-200">
+        {/* <div className="bg-green-50 rounded-lg p-6 border-2 border-green-200">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-2">
@@ -155,7 +169,7 @@ export default function Home() {
                   <p className="text-gray-600 text-sm">Pembukaan • 7 Ayat</p>
                 </div>
               </div>
-              <p className="text-gray-600 italic">Ayat terakhir: Ayat 5</p>
+              <p className="text-gray-600 italic"></p>
             </div>
             <Link
               href="/quran/1?verse=5"
@@ -164,7 +178,27 @@ export default function Home() {
               Lanjutkan
             </Link>
           </div>
-        </div>
+        </div> */}
+        {lastRead && (
+          <div className="bg-linear-to-r from-green-500 to-emerald-600 text-white rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <TrendingUp className="h-6 w-6" />
+              <h3 className="text-xl font-bold">Terakhir Dibaca</h3>
+            </div>
+
+            <p className="mb-4">
+              Anda terakhir membaca Surah {lastRead.surah} Ayat {lastRead.verse}
+            </p>
+
+            <Link
+              href={`/quran/${lastRead.surah}?verse=${lastRead.verse}`}
+              className="inline-flex items-center gap-2 bg-white text-green-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+            >
+              <BookOpen className="h-5 w-5" />
+              Lanjutkan Membaca
+            </Link>
+          </div>
+        )}
       </section>
     </Layout>
   );

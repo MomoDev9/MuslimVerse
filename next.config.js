@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // images: {
-  //   domains: ["api.quran.com", "equran.id", "cdn.jsdelivr.net"],
-  // },
+
   images: {
     remotePatterns: [
       {

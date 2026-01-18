@@ -45,13 +45,6 @@ export default function SimpleAudioPlayer({
 
       const url = `https://everyayah.com/data/Alafasy_128kbps/${fileCode}.mp3`;
       setAudioUrl(url);
-
-      console.log("Audio URL generated:", {
-        surahNumber: safeSurahNumber,
-        verseNumber: safeVerseNumber,
-        fileCode,
-        url,
-      });
     } catch (err) {
       console.error("Error generating audio URL:", err);
       setError("Gagal membuat URL audio");
