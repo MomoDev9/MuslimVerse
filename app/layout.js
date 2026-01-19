@@ -4,6 +4,17 @@ import { useState, useEffect } from "react";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
+export const metadata = {
+  title: {
+    default: "MuslimVerse – Website Islami",
+    template: "%s | MuslimVerse",
+  },
+  description: "Website islami modern untuk pembelajaran dan inspirasi",
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function RootLayout({ children }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -11,7 +22,7 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
 
     if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
