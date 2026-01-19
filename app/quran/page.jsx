@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import Layout from "@/components/Layout/Layout";
 import { BookOpen, Search, Filter } from "lucide-react";
 import Link from "next/link";
-import { quranAPI } from "@/lib/api";
+import { quranAPI } from "@/lib/quranApi";
 
 export default function QuranPage() {
   const [surahs, setSurahs] = useState([]);
@@ -57,7 +57,6 @@ export default function QuranPage() {
   return (
     <Layout>
       <div className="max-w-6xl mx-auto px-4">
-        {/* HEADER */}
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
             Al-Quran Digital
@@ -65,7 +64,6 @@ export default function QuranPage() {
           <p className="text-gray-600">Pilih surah untuk mulai membaca</p>
         </div>
 
-        {/* SEARCH & FILTER */}
         <div className="bg-white p-6 rounded-xl shadow mb-8">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
@@ -93,7 +91,6 @@ export default function QuranPage() {
           </div>
         </div>
 
-        {/* SURAH LIST */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredSurahs.map((surah) => (
             <Link

@@ -8,7 +8,7 @@ import AyatCard from "@/components/Quran/AyatCard";
 import SimpleAudioPlayer from "@/components/Quran/AudioPlayer";
 
 import { storage } from "@/utils/storage";
-import { quranAPI } from "@/lib/api";
+import { quranAPI } from "@/lib/quranApi";
 
 import {
   ArrowLeft,

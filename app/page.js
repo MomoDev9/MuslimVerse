@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import Layout from "../components/Layout/Layout";
+import Layout from "@/components/Layout/Layout";
 import Link from "next/link";
-import { storage } from "../utils/storage";
+import { storage } from "@/utils/storage";
 
 import {
   BookOpen,
@@ -155,30 +155,6 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* <div className="bg-green-50 rounded-lg p-6 border-2 border-green-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
-                  1
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-gray-800">
-                    Al-Fatihah
-                  </h3>
-                  <p className="text-gray-600 text-sm">Pembukaan • 7 Ayat</p>
-                </div>
-              </div>
-              <p className="text-gray-600 italic"></p>
-            </div>
-            <Link
-              href="/quran/1?verse=5"
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
-            >
-              Lanjutkan
-            </Link>
-          </div>
-        </div> */}
         {lastRead && (
           <div className="bg-linear-to-r from-green-500 to-emerald-600 text-white rounded-2xl p-8">
             <div className="flex items-center gap-3 mb-4">

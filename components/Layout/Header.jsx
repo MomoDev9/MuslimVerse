@@ -12,7 +12,7 @@ export default function Header() {
   const navigation = [
     { name: "Beranda", href: "/", icon: Home },
     { name: "Al-Quran", href: "/quran", icon: BookOpen },
-    { name: "Jadwal Sholat", href: "/jadwal-sholat", icon: Clock },
+    { name: "Jadwal Sholat", href: "/prayer-times", icon: Clock },
   ];
 
   return (
