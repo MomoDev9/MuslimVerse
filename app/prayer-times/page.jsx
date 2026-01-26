@@ -5,8 +5,8 @@ import { getUserLocation } from "@/lib/location";
 import { fetchPrayerDay, fetchPrayerMonth } from "@/lib/prayerApi";
 
 import Layout from "@/components/Layout/Layout";
-import PrayerDayCard from "@/components/Pray/PrayerDayCard";
-import PrayerMonthCard from "@/components/Pray/PrayerMonthCard";
+import PrayerDayCard from "@/components/Pray/DayCard";
+import PrayerMonthCard from "@/components/Pray/MonthCard";
 import LocationSelector from "@/components/Pray/LocationSelector";
 
 export default function PrayerTimesPage() {

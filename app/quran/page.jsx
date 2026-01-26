@@ -48,7 +48,7 @@ export default function QuranPage() {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin h-12 w-12 border-b-2 border-green-600 rounded-full" />
+          <div className="animate-spin h-12 w-12 border-b-2 border-green-600 rounded-full dark:font-bold" />
         </div>
       </Layout>
     );
@@ -58,7 +58,7 @@ export default function QuranPage() {
     <Layout>
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+          <h1 className="text-4xl font-bold text-gray-800 mb-2 dark:text-white">
             Al-Quran Digital
           </h1>
           <p className="text-gray-600">Pilih surah untuk mulai membaca</p>

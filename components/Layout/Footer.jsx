@@ -17,19 +17,61 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="text-center md:text-right">
-            <div className="flex items-center justify-center md:justify-end space-x-2 text-gray-400 mb-2">
-              <Heart className="h-4 w-4" />
-              <span>Dibuat dengan ❤️ untuk umat Islam</span>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Fitur</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/prayer-times" className="hover:text-green-400">
+                    Waktu Sholat
+                  </a>
+                </li>
+                <li>
+                  <a href="/quran" className="hover:text-green-400">
+                    Al-Quran
+                  </a>
+                </li>
+                <li>
+                  <a href="/calendar" className="hover:text-green-400">
+                    Kalender Islam
+                  </a>
+                </li>
+              </ul>
             </div>
-            <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} MuslimVerse. Semua hak dilindungi.
-            </p>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Lainnya</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/about" className="hover:text-green-400">
+                    Tentang Kami
+                  </a>
+                </li>
+                <li>
+                  <a href="/donate" className="hover:text-green-400">
+                    Donasi
+                  </a>
+                </li>
+                <li>
+                  <a href="/feedback" className="hover:text-green-400">
+                    Saran & Masukan
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-500 text-sm">
-          <p>
+        <div className="mt-8 pt-8 border-t border-gray-700">
+          <div className="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+            <p className="mb-4 md:mb-0">
+              © {new Date().getFullYear()} MuslimVerse. Semua hak dilindungi.
+            </p>
+            <div className="flex items-center justify-center space-x-2">
+              <Heart className="h-4 w-4" />
+              <span>Dibuat dengan ❤️ untuk umat Islam</span>
+            </div>
+          </div>
+          <p className="mt-4 text-center text-xs">
             Data diambil dari API publik Quran.com dan EQuran.id. Website ini
             tidak berafiliasi dengan organisasi mana pun.
           </p>

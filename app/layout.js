@@ -8,7 +8,7 @@ export const metadata = {
     default: "MuslimVerse – Website Islami",
     template: "%s | MuslimVerse",
   },
-  description: "Website islami modern untuk pembelajaran dan inspirasi",
+  description: "Website Islami modern untuk pembelajaran dan inspirasi",
   robots: {
     index: true,
     follow: true,
@@ -18,9 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
-      <body
-        className={`${inter.className} bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300`}
-      >
+      <body className={`${inter.className} transition-colors duration-300`}>
         {children}
       </body>
     </html>

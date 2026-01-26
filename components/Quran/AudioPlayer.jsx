@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
   Play,
   Pause,
@@ -13,7 +13,7 @@ import {
   ListMusic,
 } from "lucide-react";
 
-export default function SimpleAudioPlayer({
+export default function AudioPlayer({
   surahNumber = 1,
   verseNumber = 1,
   surahName = "Al-Fatihah",
@@ -51,6 +51,22 @@ export default function SimpleAudioPlayer({
     }
   }, [safeSurahNumber, safeVerseNumber]);
 
+  const handleAudioEnded = useCallback(() => {
+    setIsPlaying(false);
+
+    if (isRepeat && audioRef.current) {
+      setTimeout(() => {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+        setIsPlaying(true);
+      }, 500);
+    } else if (isAutoNext && onNextVerse && safeVerseNumber < totalVerses) {
+      setTimeout(() => {
+        onNextVerse();
+      }, 500);
+    }
+  }, [isRepeat, isAutoNext, onNextVerse, safeVerseNumber, totalVerses]);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -83,7 +99,7 @@ export default function SimpleAudioPlayer({
       audio.removeEventListener("error", handleError);
       audio.removeEventListener("canplay", handleCanPlay);
     };
-  }, [volume]);
+  }, [volume, handleAudioEnded]);
 
   useEffect(() => {
     if (audioUrl && audioRef.current) {
@@ -108,21 +124,6 @@ export default function SimpleAudioPlayer({
       setError("Gagal memutar audio. Coba lagi.");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleAudioEnded = () => {
-    setIsPlaying(false);
-    if (isRepeat && audioRef.current) {
-      setTimeout(() => {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play();
-        setIsPlaying(true);
-      }, 500);
-    } else if (isAutoNext && onNextVerse && safeVerseNumber < totalVerses) {
-      setTimeout(() => {
-        onNextVerse();
-      }, 500);
     }
   };
 
