@@ -82,7 +82,9 @@ export default function PrayerTimesPage() {
   return (
     <Layout>
       <div className="max-w-3xl mx-auto p-4 space-y-4">
-        <h1 className="text-xl font-bold">Jadwal Sholat & Imsakiyah</h1>
+        <h1 className="text-xl font-bold text-center dark:text-white ">
+          Jadwal Sholat & Imsakiyah
+        </h1>
 
         <LocationSelector
           onSelect={(loc) => {
@@ -97,21 +99,21 @@ export default function PrayerTimesPage() {
           }}
         />
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           <button
             onClick={() => setMode("daily")}
-            className={`px-3 py-1 rounded ${
+            className={`px-3 py-1 rounded-full ${
               mode === "daily" ? "bg-green-600 text-white" : "border"
-            }`}
+            } dark:text-white `}
           >
             Hari Ini
           </button>
 
           <button
             onClick={() => setMode("monthly")}
-            className={`px-3 py-1 rounded ${
+            className={`px-3 py-1 rounded-full ${
               mode === "monthly" ? "bg-green-600 text-white" : "border"
-            }`}
+            } dark:text-white `}
           >
             30 Hari
           </button>
@@ -128,7 +130,10 @@ export default function PrayerTimesPage() {
         )}
 
         {!loading && mode === "monthly" && Array.isArray(data) && (
-          <PrayerMonthCard days={data} />
+          <PrayerMonthCard
+            days={data}
+            city={shortenLocationString(location?.city)}
+          />
         )}
       </div>
     </Layout>

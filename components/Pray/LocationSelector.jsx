@@ -31,7 +31,7 @@ export default function LocationSelector({ onSelect }) {
   return (
     <div className="space-y-2">
       <input
-        className="border rounded p-2 w-full"
+        className="border rounded p-2 w-full dark:bg-gray-800 dark:text-white dark:border-gray-700"
         placeholder="Cari kecamatan / desa..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
@@ -44,14 +44,14 @@ export default function LocationSelector({ onSelect }) {
         Cari
       </button>
 
-      <ul className="border rounded divide-y">
+      <ul className="border rounded divide-y dark:divide-gray-700 max-h-60 overflow-y-auto dark:border-gray-700">
         {results.map((item) => (
           <li
             key={item.place_id}
-            className="p-2 hover:bg-gray-100 cursor-pointer"
+            className="p-2 hover:bg-gray-200 cursor-pointer dark:hover:bg-gray-700 dark:text-white even:bg-gray-100 dark:even:bg-white/5 rounded md:p-3"
             onClick={() => handleSelect(item)}
           >
-            {item.display_name}
+            {item.display_name.split(",").slice(0, 5).join(",")}
           </li>
         ))}
       </ul>

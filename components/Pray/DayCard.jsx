@@ -14,7 +14,7 @@ export default function PrayerDayCard({ timings, date, city }) {
     <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800">
       <div className="p-6">
         <h2 className="font-bold text-xl text-gray-800 dark:text-gray-100">
-          Jadwal Sholat {city ? `di ${city}` : "Hari Ini"}
+          Jadwal Sholat Hari Ini {city ? `di ${city}` : ""}
         </h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           {date.readable}

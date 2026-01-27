@@ -21,7 +21,7 @@ const HIJRI_MONTHS = [
 
 const DAYS = ["Ahad", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
 
-export default function HijriMonthCalendar() {
+export default function Calendar() {
   const [hMonth, setHMonth] = useState(null);
   const [hYear, setHYear] = useState(null);
   const [days, setDays] = useState([]);
@@ -29,7 +29,6 @@ export default function HijriMonthCalendar() {
 
   const today = new Date();
 
-  // ambil hijriyah hari ini
   useEffect(() => {
     const fmt = new Intl.DateTimeFormat("en-TN-u-ca-islamic", {
       month: "numeric",
@@ -41,7 +40,6 @@ export default function HijriMonthCalendar() {
     setHYear(Number(parts.find((p) => p.type === "year")?.value));
   }, []);
 
-  // fetch kalender hijriyah 1 bulan penuh
   useEffect(() => {
     if (!hMonth || !hYear) return;
 
@@ -77,29 +75,27 @@ export default function HijriMonthCalendar() {
 
   return (
     <div className="bg-white dark:bg-zinc-900 rounded-xl shadow p-6">
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={prevMonth}
-          className="px-3 py-1 hover:bg-zinc-100 rounded"
+          className="px-3 py-1 hover:bg-zinc-100 dark:hover:bg-zinc-700 dark:text-white rounded"
         >
           ←
         </button>
 
-        <h2 className="text-xl font-semibold">
+        <h2 className="text-xl font-semibold dark:text-white">
           {HIJRI_MONTHS[hMonth - 1]} {hYear} H
         </h2>
 
         <button
           onClick={nextMonth}
-          className="px-3 py-1 hover:bg-zinc-100 rounded"
+          className="px-3 py-1 hover:bg-zinc-100 dark:hover:bg-zinc-700 dark:text-white rounded "
         >
           →
         </button>
       </div>
 
-      {/* Nama Hari */}
-      <div className="grid grid-cols-7 gap-2 mb-2 text-center">
+      <div className="grid grid-cols-7 gap-2 mb-2 text-center text-zinc-600 dark:text-zinc-400">
         {DAYS.map((d) => (
           <div key={d} className="text-sm font-medium">
             {d}
@@ -107,7 +103,6 @@ export default function HijriMonthCalendar() {
         ))}
       </div>
 
-      {/* Kalender */}
       <div className="grid grid-cols-7 gap-2">
         {days.map((d) => {
           const hDay = Number(d.hijri.day);
@@ -125,11 +120,11 @@ export default function HijriMonthCalendar() {
               key={d.gregorian.date}
               onClick={() => setSelectedDay(hDay)}
               className={`
-                relative min-h-[72px] p-2 rounded-lg border text-left
+                relative min-h-18 p-2 rounded-lg border text-left 
                 ${hasEvent ? "border-green-500" : "border-zinc-200"}
                 ${isToday ? "bg-blue-300 border-blue-700" : ""}
                 ${selectedDay === hDay ? "ring-2 ring-green-500" : ""}
-                hover:bg-zinc-100
+                hover:bg-zinc-100 dark:hover:bg-zinc-700 dark:text-white dark:bg-zinc-800
               `}
             >
               <div className="text-base font-semibold leading-none">{hDay}</div>
@@ -145,22 +140,28 @@ export default function HijriMonthCalendar() {
         })}
       </div>
 
-      {/* Detail Event */}
       {selectedDay && (
         <div className="mt-6 rounded-lg border p-4 bg-zinc-50 dark:bg-zinc-800">
-          <p className="font-semibold">
+          <p className="font-semibold dark:text-white">
             {selectedDay} {HIJRI_MONTHS[hMonth - 1]} {hYear} H
           </p>
 
           {event ? (
             <>
-              <p className="mt-1 font-medium text-green-700">{event.title}</p>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
-                {event.description}
+              <p className="mt-1 font-medium text-green-700 dark:text-green-400">
+                {event.title}
               </p>
+              <p
+                className="mt-1 text-sm text-zinc-600 dark:text-zinc-300"
+                dangerouslySetInnerHTML={{
+                  __html: event.description.replace(/\. /g, ".<br />"),
+                }}
+              />
             </>
           ) : (
-            <p className="mt-1 text-zinc-500">Tidak ada peringatan khusus</p>
+            <p className="mt-1 text-zinc-500 dark:text-zinc-400">
+              Tidak ada peringatan khusus
+            </p>
           )}
         </div>
       )}
