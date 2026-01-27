@@ -1,74 +1,44 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Sun, MoonStar, Monitor } from "lucide-react";
+import { Sun, MoonStar } from "lucide-react";
 
 export default function DarkMode() {
-  const [theme, setTheme] = useState("system");
+  const [theme, setTheme] = useState("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem("theme") || "system";
-    setTheme(savedTheme);
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setTheme("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      setTheme("light");
+    }
   }, []);
 
-  const applyTheme = (selectedTheme) => {
-    const root = document.documentElement;
-
-    root.classList.remove("light", "dark");
-
-    if (selectedTheme === "dark") {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else if (selectedTheme === "light") {
-      root.classList.add("light");
-      localStorage.setItem("theme", "light");
-    } else {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      if (prefersDark) {
-        root.classList.add("dark");
-      } else {
-        root.classList.add("light");
-      }
-      localStorage.setItem("theme", "system");
-    }
-    setTheme(selectedTheme);
-  };
-
   const toggleTheme = () => {
-    const themes = ["light", "dark", "system"];
-    const currentIndex = themes.indexOf(theme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    const nextTheme = themes[nextIndex];
-    applyTheme(nextTheme);
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
   };
 
   const getThemeIcon = () => {
-    switch (theme) {
-      case "light":
-        return <Sun className="h-5 w-5 text-orange-500 bg-gray-300" />;
-      case "dark":
-        return <MoonStar className="h-5 w-5 bg-gray-600 text-amber-300" />;
-      case "system":
-        return <Monitor className="h-5 w-5 bg-black text-white" />;
-      default:
-        return <Monitor className="h-5 w-5" />;
+    if (theme === "dark") {
+      return <MoonStar className="h-5 w-5 bg-gray-600 text-amber-300" />;
     }
+    return <Sun className="h-5 w-5 text-orange-500 bg-gray-300" />;
   };
 
   const getThemeLabel = () => {
-    switch (theme) {
-      case "light":
-        return "Terang";
-      case "dark":
-        return "Gelap";
-      case "system":
-        return "Sistem";
-      default:
-        return "Sistem";
-    }
+    return theme === "dark" ? "Gelap" : "Terang";
   };
 
   if (!mounted) {

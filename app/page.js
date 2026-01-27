@@ -7,14 +7,15 @@ import { quranAPI } from "@/lib/quranApi";
 
 import {
   BookOpen,
-  Volume2,
+  Languages,
   Search,
   Calendar,
   Heart,
   Star,
-  TrendingUp,
+  Volume2,
   HandHelping,
   Clock,
+  BookCheck,
 } from "lucide-react";
 
 export default function Home() {
@@ -66,8 +67,8 @@ export default function Home() {
   const stats = [
     { label: "Jumlah Surah", value: "114", icon: BookOpen },
     { label: "Total Ayat", value: "6.236", icon: Star },
-    { label: "Terjemahan", value: "Bahasa Indonesia", icon: Volume2 },
-    { label: "Audio Murattal", value: "Qari Ternama", icon: TrendingUp },
+    { label: "Terjemahan", value: "Bahasa Indonesia", icon: Languages },
+    { label: "Audio Murattal", value: "Qari Ternama", icon: Volume2 },
   ];
 
   const [lastRead, setLastRead] = useState(null);
@@ -185,7 +186,7 @@ export default function Home() {
         {lastRead && (
           <div className="bg-linear-to-r from-green-500 to-emerald-600 text-white rounded-2xl p-8">
             <div className="flex items-center gap-3 mb-4">
-              <TrendingUp className="h-6 w-6" />
+              <BookCheck className="h-6 w-6" />
               <h3 className="text-xl font-bold">Terakhir Dibaca</h3>
             </div>
 

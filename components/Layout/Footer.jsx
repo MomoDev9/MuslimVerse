@@ -12,7 +12,7 @@ export default function Footer() {
               <span className="text-xl font-bold">MuslimVerse</span>
             </div>
             <p className="text-gray-400 max-w-md">
-              Website untuk membaca dan mempelajari Al-Quran secara digital.
+              Website untuk membaca Al-Quran dan informasi Islam secara digital.
               Gratis untuk semua umat Muslim.
             </p>
           </div>
@@ -62,18 +62,23 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-700">
-          <div className="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+          <div className="flex flex-col md:flex-row justify-between text-gray-500 text-sm">
             <p className="mb-4 md:mb-0">
               © {new Date().getFullYear()} MuslimVerse. Semua hak dilindungi.
             </p>
-            <div className="flex items-center justify-center space-x-2">
-              <Heart className="h-4 w-4" />
-              <span>Dibuat dengan ❤️ untuk umat Islam</span>
+            <div className="grid md:grid-cols-3">
+              <div></div>
+              <div>
+                <p>
+                  Dibuat oleh <a href="momodev.vercel.app">?</a>
+                </p>
+                <p>Dibuat dengan ❤️ untuk umat Islam</p>
+              </div>
             </div>
           </div>
           <p className="mt-4 text-center text-xs">
-            Data diambil dari API publik Quran.com dan EQuran.id. Website ini
-            tidak berafiliasi dengan organisasi mana pun.
+            Data diambil dari API publik. Website ini tidak berafiliasi dengan
+            organisasi mana pun.
           </p>
         </div>
       </div>
