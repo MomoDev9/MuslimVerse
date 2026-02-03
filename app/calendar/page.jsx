@@ -1,8 +1,10 @@
 import Layout from "@/components/Layout/Layout";
-import Calendar from "@/components/UI/Calendar";
+import Calendar from "@/components/OnePage/Calendar";
 
 export const metadata = {
-  title: "Kalender Hijriyah | MuslimVerse",
+  title: "Kalender Hijriyah",
+  description:
+    "Lihat kalender hijriyah dan hari-hari penting dalam kalender Islam.",
 };
 
 export default function HijriCalendarPage() {

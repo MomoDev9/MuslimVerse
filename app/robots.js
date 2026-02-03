@@ -4,8 +4,9 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
+        disallow: "/donat",
       },
     ],
-    sitemap: "https://muslim-verse.vercel.app/",
+    sitemap: "https://muslim-verse.vercel.app/sitemap.xml",
   };
 }

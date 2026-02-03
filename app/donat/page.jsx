@@ -1,6 +1,12 @@
 import Layout from "@/components/Layout/Layout";
 import { Heart } from "lucide-react";
 
+export const metadata = {
+  title: "Donasi untuk MuslimVerse",
+  description:
+    "Dukung pengembangan MuslimVerse dengan donasi Anda. Bantuan Anda membantu kami menjaga layanan tetap gratis dan menambahkan fitur baru.",
+};
+
 export default function DonatePage() {
   return (
     <Layout>

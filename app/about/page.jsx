@@ -1,6 +1,12 @@
 import Layout from "@/components/Layout/Layout";
 import { BookOpen } from "lucide-react";
 
+export const metadata = {
+  title: "Tentang MuslimVerse",
+  description:
+    "Pelajari lebih lanjut tentang misi MuslimVerse, dan sumber data yang kami gunakan",
+};
+
 export default function AboutContent() {
   return (
     <Layout>

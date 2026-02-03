@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: {
     default: "MuslimVerse – Website Islami",
-    template: "%s | MuslimVerse",
+    template: "%s - MuslimVerse",
   },
   description: "Website Islami modern untuk pembelajaran dan inspirasi",
   robots: {

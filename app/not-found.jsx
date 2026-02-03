@@ -1,5 +1,9 @@
 import Layout from "@/components/Layout/Layout";
 
+export const metadata = {
+  title: "Halaman Tidak Ditemukan",
+};
+
 export default function NotFound() {
   return (
     <Layout>

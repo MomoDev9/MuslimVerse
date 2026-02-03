@@ -1,12 +1,11 @@
 import { quranAPI } from "@/lib/quranApi";
 
-const URL = "https://muslim-verse.vercel.app";
+const URL = process.env.NEXT_PUBLIC_SITE_URL || "https://muslim-verse.vercel.app";
 
 export default async function sitemap() {
   const staticPages = [
     "about",
     "calendar",
-    "donate",
     "favorite",
     "feedback",
     "prayer-times",
