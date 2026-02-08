@@ -1,9 +1,9 @@
-import PrayerTimes from "@/components/OnePage/PrayerTimes";
+import PrayerTimes from "@/components/Pray/PrayerTimesPage";
 import Layout from "@/components/Layout/Layout";
 
 export const metadata = {
   title: "Jadwal Sholat",
-  description: "Jadwal Sholat dan Imsakiyah di MuslimVerse",
+  description: "Lihat dan download Jadwal Sholat dan Imsakiyah di MuslimVerse",
 };
 
 export default function PrayerTimesPage() {

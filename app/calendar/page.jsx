@@ -4,7 +4,7 @@ import Calendar from "@/components/OnePage/Calendar";
 export const metadata = {
   title: "Kalender Hijriyah",
   description:
-    "Lihat kalender hijriyah dan hari-hari penting dalam kalender Islam.",
+    "Lihat dan download kalender hijriyah dan hari-hari penting dalam kalender Islam.",
 };
 
 export default function HijriCalendarPage() {

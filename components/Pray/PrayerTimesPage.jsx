@@ -4,16 +4,18 @@ import { useEffect, useState } from "react";
 import { getUserLocation } from "@/lib/location";
 import { fetchPrayerDay, fetchPrayerMonth } from "@/lib/prayerApi";
 
-import Layout from "@/components/Layout/Layout";
 import PrayerDayCard from "@/components/Pray/DayCard";
 import PrayerMonthCard from "@/components/Pray/MonthCard";
 import LocationSelector from "@/components/Pray/LocationSelector";
+import PrayerTimesExportButton from "@/components/Button/PrayerTimesExport";
 
 export default function PrayerTimesPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("daily");
   const [location, setLocation] = useState(null);
+
+  const month = new Date().toLocaleString("id-ID", { month: "long" });
 
   const loadData = async (lat, lng, targetMode) => {
     setLoading(true);
@@ -80,62 +82,66 @@ export default function PrayerTimesPage() {
   }
 
   return (
-    <Layout>
-      <div className="max-w-3xl mx-auto p-4 space-y-4">
-        <h1 className="text-xl font-bold text-center dark:text-white ">
-          Jadwal Sholat & Imsakiyah
-        </h1>
+    <div className="max-w-3xl mx-auto p-4 space-y-4">
+      <h1 className="text-xl font-bold text-center dark:text-white ">
+        Jadwal Sholat & Imsakiyah
+      </h1>
+      <LocationSelector
+        onSelect={(loc) => {
+          const newLoc = {
+            latitude: loc.lat,
+            longitude: loc.lng,
+            city: loc.name,
+          };
 
-        <LocationSelector
-          onSelect={(loc) => {
-            const newLoc = {
-              latitude: loc.lat,
-              longitude: loc.lng,
-              city: loc.name,
-            };
+          setLocation(newLoc);
+          loadData(newLoc.latitude, newLoc.longitude, mode);
+        }}
+      />
+      <div className="flex gap-2 ">
+        <button
+          onClick={() => setMode("daily")}
+          className={`px-3 py-1 rounded-full ${
+            mode === "daily" ? "bg-green-600 text-white" : "border"
+          } dark:text-white `}
+        >
+          Hari Ini
+        </button>
 
-            setLocation(newLoc);
-            loadData(newLoc.latitude, newLoc.longitude, mode);
-          }}
+        <button
+          onClick={() => setMode("monthly")}
+          className={`px-3 py-1 rounded-full ${
+            mode === "monthly" ? "bg-green-600 text-white" : "border"
+          } dark:text-white `}
+        >
+          30 Hari
+        </button>
+      </div>
+      {loading && <p>Memuat jadwal...</p>}
+      {!loading && mode === "daily" && data && (
+        <PrayerDayCard
+          timings={data.timings}
+          date={data.date}
+          city={shortenLocationString(location?.city)}
         />
-
-        <div className="flex gap-2 ">
-          <button
-            onClick={() => setMode("daily")}
-            className={`px-3 py-1 rounded-full ${
-              mode === "daily" ? "bg-green-600 text-white" : "border"
-            } dark:text-white `}
-          >
-            Hari Ini
-          </button>
-
-          <button
-            onClick={() => setMode("monthly")}
-            className={`px-3 py-1 rounded-full ${
-              mode === "monthly" ? "bg-green-600 text-white" : "border"
-            } dark:text-white `}
-          >
-            30 Hari
-          </button>
-        </div>
-
-        {loading && <p>Memuat jadwal...</p>}
-
-        {!loading && mode === "daily" && data && (
-          <PrayerDayCard
-            timings={data.timings}
-            date={data.date}
-            city={shortenLocationString(location?.city)}
-          />
-        )}
-
-        {!loading && mode === "monthly" && Array.isArray(data) && (
+      )}
+      {!loading && mode === "monthly" && Array.isArray(data) && (
+        <div className="space-y-3">
           <PrayerMonthCard
             days={data}
             city={shortenLocationString(location?.city)}
           />
-        )}
-      </div>
-    </Layout>
+          <div className="flex w-full justify-end">
+            <PrayerTimesExportButton
+              days={data}
+              city={shortenLocationString(location?.city)}
+              monthLabel={month}
+              label="Download PDF"
+              filename={`jadwal-sholat-${month}`}
+            />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
