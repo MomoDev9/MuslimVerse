@@ -9,7 +9,7 @@ import PrayerMonthCard from "@/components/Pray/MonthCard";
 import LocationSelector from "@/components/Pray/LocationSelector";
 import PrayerTimesExportButton from "@/components/Button/PrayerTimesExport";
 
-export default function PrayerTimesPage() {
+export default function PrayerTimesPage({ initialLocationName }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("daily");
@@ -44,28 +44,73 @@ export default function PrayerTimesPage() {
   };
 
   useEffect(() => {
-    getUserLocation()
-      .then((loc) => {
-        const initialLoc = {
-          latitude: loc.latitude,
-          longitude: loc.longitude,
-          city: loc.city || "Lokasi Anda",
-        };
+    let isMounted = true;
 
-        setLocation(initialLoc);
-        loadData(initialLoc.latitude, initialLoc.longitude, mode);
-      })
-      .catch(() => {
-        const fallback = {
-          latitude: -6.2,
-          longitude: 106.8,
-          city: "Jakarta",
-        };
+    const applyLocation = (loc) => {
+      if (!isMounted) return;
+      setLocation(loc);
+      loadData(loc.latitude, loc.longitude, mode);
+    };
 
-        setLocation(fallback);
-        loadData(fallback.latitude, fallback.longitude, mode);
-      });
-  }, []);
+    const fallbackToJakarta = () => {
+      const fallback = {
+        latitude: -6.2,
+        longitude: 106.8,
+        city: initialLocationName ? initialLocationName : "Jakarta",
+      };
+
+      applyLocation(fallback);
+    };
+
+    const fallbackToGeolocation = () => {
+      getUserLocation()
+        .then((loc) => {
+          const initialLoc = {
+            latitude: loc.latitude,
+            longitude: loc.longitude,
+            city: loc.city || "Lokasi Anda",
+          };
+
+          applyLocation(initialLoc);
+        })
+        .catch(() => fallbackToJakarta());
+    };
+
+    const fetchLocationByName = async (name) => {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?` +
+          `q=${encodeURIComponent(name)}` +
+          `&format=json&countrycodes=id&limit=1`,
+      );
+      const data = await res.json();
+      return Array.isArray(data) ? data[0] : null;
+    };
+
+    if (initialLocationName) {
+      fetchLocationByName(initialLocationName)
+        .then((item) => {
+          if (!item) {
+            fallbackToJakarta();
+            return;
+          }
+
+          const initialLoc = {
+            latitude: Number(item.lat),
+            longitude: Number(item.lon),
+            city: item.display_name || initialLocationName,
+          };
+
+          applyLocation(initialLoc);
+        })
+        .catch(() => fallbackToJakarta());
+    } else {
+      fallbackToGeolocation();
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [initialLocationName]);
 
   useEffect(() => {
     if (!location) return;
@@ -87,6 +132,7 @@ export default function PrayerTimesPage() {
         Jadwal Sholat & Imsakiyah
       </h1>
       <LocationSelector
+        initialQuery={initialLocationName}
         onSelect={(loc) => {
           const newLoc = {
             latitude: loc.lat,

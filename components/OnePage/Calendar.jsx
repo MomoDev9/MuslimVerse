@@ -31,24 +31,38 @@ const WEEKDAY_EN = [
   "Saturday",
 ];
 
-export default function Calendar() {
-  const [hMonth, setHMonth] = useState(null);
-  const [hYear, setHYear] = useState(null);
+export default function Calendar({ initialHYear, initialHMonth }) {
+  const [hMonth, setHMonth] = useState(
+    Number.isFinite(initialHMonth) ? initialHMonth : null,
+  );
+  const [hYear, setHYear] = useState(
+    Number.isFinite(initialHYear) ? initialHYear : null,
+  );
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
 
   const today = new Date();
 
   useEffect(() => {
+    if (hMonth && hYear) return;
+
     const fmt = new Intl.DateTimeFormat("en-TN-u-ca-islamic", {
       month: "numeric",
       year: "numeric",
     });
 
     const parts = fmt.formatToParts(today);
-    setHMonth(Number(parts.find((p) => p.type === "month")?.value));
-    setHYear(Number(parts.find((p) => p.type === "year")?.value));
-  }, []);
+    const currentMonth = Number(parts.find((p) => p.type === "month")?.value);
+    const currentYear = Number(parts.find((p) => p.type === "year")?.value);
+
+    if (!hMonth && hYear) {
+      setHMonth(1);
+    } else if (!hMonth) {
+      setHMonth(currentMonth);
+    }
+
+    if (!hYear) setHYear(currentYear);
+  }, [hMonth, hYear, today]);
 
   useEffect(() => {
     if (!hMonth || !hYear) return;

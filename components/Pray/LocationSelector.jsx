@@ -1,9 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function LocationSelector({ onSelect }) {
-  const [query, setQuery] = useState("");
+export default function LocationSelector({ onSelect, initialQuery }) {
+  const [query, setQuery] = useState(initialQuery);
   const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    if (typeof initialQuery !== "string") return;
+    const trimmed = initialQuery.trim();
+    if (!trimmed) return;
+    setQuery(trimmed);
+  }, [initialQuery]);
 
   const searchLocation = async () => {
     if (!query) return;
