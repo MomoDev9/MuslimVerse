@@ -20,9 +20,7 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-white p-2 rounded-lg">
-              <BookOpen className="h-6 w-6 text-green-600" />
-            </div>
+            <img src="/logo.png" alt="Logo Muslimverse" className="h-12 w-12" />
             <span className="text-xl font-bold">MuslimVerse</span>
           </Link>
 

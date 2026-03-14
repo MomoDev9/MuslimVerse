@@ -49,8 +49,6 @@ export default function SurahDetailPage() {
         setError(null);
 
         const data = await quranAPI.getSurahDetail(surahId);
-        console.log("Loading surah detail for ID:", surahId);
-        console.log("Data:", data);
         setSurahData(data.surahInfo);
         setVerses(data.verses);
       } catch (err) {

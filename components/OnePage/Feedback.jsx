@@ -18,7 +18,7 @@ export default function FeedbackPage() {
       return;
     }
 
-    // Simulasi pengiriman form
+    console.log("//Simulasi pengiriman form");
     console.log("Saran:", feedback);
     console.log("Email:", email);
 

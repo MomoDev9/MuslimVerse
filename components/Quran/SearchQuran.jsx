@@ -9,7 +9,6 @@ export default function SearchQuran({ onSearch }) {
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      console.log("Searching for:", query, "type:", searchType);
     }
   };
 

@@ -32,9 +32,11 @@ export default function DarkMode() {
 
   const getThemeIcon = () => {
     if (theme === "dark") {
-      return <MoonStar className="h-5 w-5 bg-gray-600 text-amber-300" />;
+      return (
+        <MoonStar className="h-5 w-5 bg-black text-yellow-400 rounded-full" />
+      );
     }
-    return <Sun className="h-5 w-5 text-orange-500 bg-gray-300" />;
+    return <Sun className="h-5 w-5 bg-white text-orange-500 rounded-full" />;
   };
 
   const getThemeLabel = () => {
