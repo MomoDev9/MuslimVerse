@@ -45,7 +45,7 @@ export default function Home() {
       icon: HandHelping,
       title: "Doa Harian",
       description: "Kumpulan doa-doa harian beserta artinya",
-      link: "/duas",
+      link: "/daily-dua",
       color: "from-blue-500 to-cyan-500",
     },
     {
